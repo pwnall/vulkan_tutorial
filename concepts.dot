@@ -1,0 +1,47 @@
+digraph {
+  WSI [label="Window System Integration", shape=cylinder]
+  WSI_Extensions [label="WSI-required Vulkan extensions"]
+  VkSurfaceKHR [label="VkSurfaceKHR", shape=octagon]
+
+  WSI -> WSI_Extensions
+  WSI -> VkSurfaceKHR
+
+  VulkanLibrary [label="Vulkan Library", shape=cylinder]
+  VkExtensionProperties_Instance [label="VkExtensionProperties for supported instance extensions"]
+  VkLayerProperties_Instance [label="VkLayerProperties for supported layer extensions"]
+
+  VulkanLibrary -> VkExtensionProperties_Instance
+  VulkanLibrary -> VkLayerProperties_Instance
+
+  InstanceLayerList [label="Enabled instance layers"]
+  InstanceExtensionList [label="Enabled instance extensions"]
+
+  WSI_Extensions -> InstanceExtensionList
+  VkExtensionProperties_Instance -> InstanceExtensionList
+  VkLayerProperties_Instance -> InstanceLayerList
+
+  VkInstance [label="VkInstance", shape=octagon]
+
+  InstanceExtensionList -> VkInstance
+  InstanceLayerList -> VkInstance
+
+  VulkanPhysicalDeviceList [label="VulkanPhysicalDevice list"]
+  VkPhysicalDevice [label="VkPhysicalDevice", shape=octagon]
+  VkPhysicalDeviceFeatures [label="VkPhysicalDeviceFeatures", shape=octagon]
+  VkPhysicalDeviceMemoryProperties [label="VkPhysicalDeviceFeatures", shape=octagon]
+  VkQueueFamilyProperties [label="VkQueueFamilyProperties", shape=octagon]
+
+  VkInstance -> VulkanPhysicalDeviceList
+  VulkanPhysicalDeviceList -> VkPhysicalDevice
+  VkPhysicalDevice -> VkPhysicalDeviceFeatures
+  VkPhysicalDevice -> VkPhysicalDeviceMemoryProperties
+  VkPhysicalDevice -> VkQueueFamilyProperties
+
+  VkSurfaceCapabilitiesKHR [label="VkSurfaceCapabilitiesKHR", shape=octagon]
+  VkSurfaceFormatKHR [label="VkSurfaceFormatKHR list"]
+  VkPresentModeKHR [label="VkPresentModeKHR list"]
+
+  {VkPhysicalDevice, VkSurfaceKHR} -> VkSurfaceCapabilitiesKHR
+  {VkPhysicalDevice, VkSurfaceKHR} -> VkSurfaceFormatKHR
+  {VkPhysicalDevice, VkSurfaceKHR} -> VkPresentModeKHR
+}

@@ -1,0 +1,2 @@
+CompileFlags:
+  CompilationDatabase: build/  # Path to compile_commands.json

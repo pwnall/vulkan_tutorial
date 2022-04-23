@@ -1,0 +1,8 @@
+# CMake output
+/build
+
+# Clangd cache
+.cache
+
+# VSCode config
+.vscode
